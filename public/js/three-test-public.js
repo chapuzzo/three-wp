@@ -36,12 +36,21 @@ const setup = () => {
 
 	Array.from(containers).forEach(container => {
 		const scene = new THREE.Scene()
+<<<<<<< HEAD
+=======
+		console.log(container.dataset['id'])
+		const color = container.dataset['color'] || 'green'
+>>>>>>> Begin party
 		
 		const renderer = new THREE.WebGLRenderer({canvas: container, })
 	    renderer.setPixelRatio(window.devicePixelRatio)
 	    renderer.setSize(container.clientWidth, container.clientHeight)
 
+<<<<<<< HEAD
 	    const ambientLight = new THREE.AmbientLight('red', 0.5)
+=======
+	    const ambientLight = new THREE.AmbientLight(color, 0.5)
+>>>>>>> Begin party
 
 	    const camera = new THREE.PerspectiveCamera(70, container.clientWidth / container.clientHeight, 1, 1000)
 		camera.position.z = 400
