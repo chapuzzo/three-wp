@@ -152,6 +152,8 @@ class Three_Test {
 	 */
 	private function define_admin_hooks() {
 
+		
+
 		$plugin_admin = new Three_Test_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
@@ -163,7 +165,8 @@ class Three_Test {
 			add_meta_box(
 				'three_color',
 				'Three color',
-				function ($post) {
+				function ( $post ) {
+
 					$color = get_post_meta($post->ID, '_three_color', true);
 					if (empty($color)){
 						$color = '#0000ff';
@@ -175,7 +178,7 @@ class Three_Test {
 			);
 		});
 
-		add_action('save_post', function ($post_id) {
+		add_action('save_post', function ( $post_id ) {
 			if (array_key_exists('three_color', $_POST)) {
 				update_post_meta(
 					$post_id,
@@ -185,7 +188,11 @@ class Three_Test {
 			}
 		});
 
+<<<<<<< HEAD
 >>>>>>> Begin party
+=======
+
+>>>>>>> Execution line
 	}
 
 	/**
@@ -199,13 +206,34 @@ class Three_Test {
 
 		$plugin_public = new Three_Test_Public( $this->get_plugin_name(), $this->get_version() );
 
+
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
+
+
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+<<<<<<< HEAD
 <<<<<<< HEAD
 		$this->loader->add_filter( 'the_content', $plugin_public, 'add_three_container' );
 =======
 		$this->loader->add_action( 'the_post', $plugin_public, 'inspect_post' );
 >>>>>>> Begin party
+=======
+
+		add_filter( 'script_loader_tag', 'regal_tag', 10, 3 );
+
+		function regal_tag( $tag, $handle, $src ) {
+
+			if (( $handle !== 'three-test' )&&( $handle !== 'threejs' )) {
+
+				return $tag;
+			}
+
+
+			return "<script src='$src' async></script>";
+			//return "<script src='$src' defer></script>";
+		}
+		$this->loader->add_filter( 'the_content' , $plugin_public,'filter_the_content_in_the_main_loop' );
+>>>>>>> Execution line
 
 	}
 

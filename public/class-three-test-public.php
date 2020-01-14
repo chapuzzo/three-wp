@@ -97,11 +97,12 @@ class Three_Test_Public {
 		 */
 
 		wp_register_script( 'threejs', 'https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js' );
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/three-test-public.js', array( 'jquery', 'threejs' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) .'js/three-test-public.js', array( 'jquery', 'threejs' ), $this->version, true );
 
 
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	public function add_three_container($content) {
 		return $content . '<canvas class="three-test"></canvas>';
@@ -110,27 +111,40 @@ class Three_Test_Public {
 		if (is_admin()){
 			return;
 		}
+=======
+		public function filter_the_content_in_the_main_loop( $content ) {
+>>>>>>> Execution line
 
-		$color = get_post_meta($post->ID, '_three_color', true);
-		if (empty($color)){
-			$color = 'blue';
-		};
+			global $post;
 
-		$post->post_content .= '<canvas class="three-test" data-id="' . $post->ID . '" data-color="' . $color . '"></canvas>';
-	}
+		 	if ($post->ID== 1871 ){
 
-	public function inspect_page($post) {
-		if (is_admin()){
-			return;
-		}
+		 		    // Check if we're inside the main loop in a single post page.
+		 		    if ( is_front_page() && in_the_loop() && is_main_query() ) {
+		 		    	
 
-		$color = get_post_meta($post->ID, '_three_color', true);
-		if (empty($color)){
-			$color = 'blue';
-		};
+		 				if (empty($color)){
+		 					$color = '#6699FF';
+		 				};
+		 				echo '<canvas id="beginMagic" class="three-test" data-id="' . $post->ID . '" data-color="' . $color . '"></canvas>'.$content;
+		 		        //return $content.= '<canvas id="beginMagic" class="three-test" data-id="' . $post->ID . '" data-color="' . $color . '"></canvas>';
 
+<<<<<<< HEAD
 		$post->post_content .= '<canvas class="three-test" data-id="' . $post->ID . '" data-color="' . $color . '"></canvas>';
 >>>>>>> Begin party
 	}
+=======
+		 		    }
+		 		 
+		 		    
+
+		 	}else{
+				return $content;
+		 	}
+		 	
+		 	
+
+		}
+>>>>>>> Execution line
 
 }
